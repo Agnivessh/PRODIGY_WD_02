@@ -19,10 +19,13 @@ body {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    margin: 1rem;
 }
 
 .title {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
     margin-bottom: 2rem;
     text-align: center;
     color: #3498db;
@@ -35,7 +38,7 @@ body {
 }
 
 .display {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 8vw, 3.5rem);
     font-weight: bold;
     margin-bottom: 1rem;
     font-family: monospace;
@@ -44,18 +47,25 @@ body {
 
 .controls {
     margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 button {
     padding: 0.5rem 1rem;
-    margin: 0 0.25rem;
-    font-size: 1rem;
+    margin: 0;
+    font-size: clamp(0.9rem, 3vw, 1rem);
     cursor: pointer;
     border: none;
     border-radius: 5px;
     background-color: #3498db;
     color: white;
     transition: background-color 0.3s;
+    min-width: 80px;
+    flex: 1;
+    max-width: 120px;
 }
 
 button:hover {
@@ -79,9 +89,11 @@ button:hover {
 }
 
 .laps {
-    max-height: 200px;
+    max-height: clamp(150px, 40vh, 200px);
     overflow-y: auto;
     text-align: left;
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
 }
 
 .laps h3 {
@@ -97,4 +109,51 @@ button:hover {
     padding: 0.5rem;
     border-bottom: 1px solid #404040;
     color: #ffffff;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+/* Add scrollbar styling */
+.laps::-webkit-scrollbar {
+    width: 8px;
+}
+
+.laps::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 4px;
+}
+
+.laps::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 4px;
+}
+
+/* Media Queries for different screen sizes */
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .controls {
+        gap: 0.4rem;
+    }
+    
+    button {
+        padding: 0.6rem 0.8rem;
+    }
+}
+
+/* For very small screens */
+@media screen and (max-width: 320px) {
+    .container {
+        padding: 1rem 0.8rem;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    button {
+        max-width: none;
+    }
 }
