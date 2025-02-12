@@ -12,24 +12,24 @@ body {
     align-items: center;
     background-color: #1a1a1a;
     color: #ffffff;
+    padding: 1rem;
 }
 
 .container {
     background-color: #2d2d2d;
-    padding: 2rem;
+    padding: min(5vw, 2rem);
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    width: 90%;
-    max-width: 500px;
-    margin: 1rem;
+    width: min(95%, 500px);
+    margin: auto;
 }
 
 .title {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    margin-bottom: 2rem;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: min(4vw, 2rem);
     text-align: center;
     color: #3498db;
-    letter-spacing: 3px;
+    letter-spacing: max(1px, 0.3vw);
     text-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
 }
 
@@ -38,38 +38,36 @@ body {
 }
 
 .display {
-    font-size: clamp(2rem, 8vw, 3.5rem);
-    font-weight: bold;
-    margin-bottom: 1rem;
+    font-size: clamp(2rem, 10vw, 4rem);
+    line-height: 1.2;
+    margin-bottom: min(4vw, 1.5rem);
     font-family: monospace;
     color: #ffffff;
 }
 
 .controls {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
+    gap: clamp(0.3rem, 1vw, 0.8rem);
+    margin-bottom: min(4vw, 1.5rem);
+    padding: 0 min(3vw, 1rem);
 }
 
 button {
-    padding: 0.5rem 1rem;
-    margin: 0;
-    font-size: clamp(0.9rem, 3vw, 1rem);
+    padding: clamp(0.5rem, 2vw, 1rem);
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
     cursor: pointer;
     border: none;
     border-radius: 5px;
     background-color: #3498db;
     color: white;
-    transition: background-color 0.3s;
-    min-width: 80px;
-    flex: 1;
-    max-width: 120px;
+    transition: all 0.3s ease;
+    height: clamp(2.5rem, 6vw, 3rem);
 }
 
 button:hover {
-    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 #pauseBtn {
@@ -89,16 +87,21 @@ button:hover {
 }
 
 .laps {
-    max-height: clamp(150px, 40vh, 200px);
+    max-height: clamp(120px, 40vh, 300px);
     overflow-y: auto;
     text-align: left;
-    margin-top: 1.5rem;
-    padding: 0 0.5rem;
+    margin-top: min(4vw, 1.5rem);
+    padding: 0 min(3vw, 1rem);
+    border-radius: 5px;
+    background-color: #252525;
 }
 
 .laps h3 {
-    color: #3498db;
-    margin-bottom: 0.5rem;
+    position: sticky;
+    top: 0;
+    background-color: #252525;
+    padding: 0.5rem 0;
+    font-size: clamp(1rem, 3vw, 1.2rem);
 }
 
 #lapList {
@@ -106,10 +109,9 @@ button:hover {
 }
 
 #lapList li {
-    padding: 0.5rem;
+    padding: clamp(0.4rem, 1.5vw, 0.8rem);
     border-bottom: 1px solid #404040;
-    color: #ffffff;
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
 }
 
 /* Add scrollbar styling */
@@ -127,33 +129,74 @@ button:hover {
     border-radius: 4px;
 }
 
-/* Media Queries for different screen sizes */
-@media screen and (max-width: 480px) {
+/* Large screens */
+@media screen and (min-width: 1024px) {
     .container {
-        padding: 1.5rem 1rem;
+        padding: 2.5rem;
     }
-    
-    .controls {
-        gap: 0.4rem;
-    }
-    
-    button {
-        padding: 0.6rem 0.8rem;
+
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
 }
 
-/* For very small screens */
-@media screen and (max-width: 320px) {
+/* Medium screens */
+@media screen and (max-width: 768px) {
     .container {
-        padding: 1rem 0.8rem;
+        padding: 2rem;
     }
     
     .controls {
-        flex-direction: column;
-        align-items: stretch;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Small screens */
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 1.5rem;
+        width: 100%;
     }
     
+    .controls {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.4rem;
+    }
+}
+
+/* Extra small screens */
+@media screen and (max-width: 320px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .controls {
+        grid-template-columns: 1fr;
+    }
+    
+    .title {
+        font-size: 1.3rem;
+    }
+}
+
+/* Dark mode preference */
+@media (prefers-color-scheme: dark) {
+    .container {
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
     button {
-        max-width: none;
+        transition: none;
+    }
+}
+
+/* High contrast mode */
+@media (forced-colors: active) {
+    button {
+        border: 2px solid currentColor;
     }
 }
